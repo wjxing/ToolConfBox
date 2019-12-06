@@ -1,0 +1,25 @@
+[color]
+	branch = auto
+	status = auto
+	diff = auto
+[user]
+	name = wjxing
+	email = lbxx_cute@163.com
+[alias]
+	pushg = !git push $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote) HEAD:refs/for/$(git config branch.$(git rev-parse --abbrev-ref HEAD).merge)%r=atc0036
+	fetchg = !git fetch -n $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote) refs/heads/$(git rev-parse --abbrev-ref HEAD):refs/remotes/$(git config branch.$(git rev-parse --abbrev-ref HEAD).remote)/$(git rev-parse --abbrev-ref HEAD)
+	rebaseg = !git rebase $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote)/$(git rev-parse --abbrev-ref HEAD)
+	log-a = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cN - %cr)%Creset' --abbrev-commit --date=relative
+[core]
+	autocrlf = input
+	whitespace = -trailing-space,space-before-tab,-indent-with-non-tab,-cr-at-eol
+	pager = less -x1,5
+	editor = vim
+[difftool]
+	prompt = false
+[diff]
+	tool = vimdiff
+[oh-my-zsh]
+	hide-dirty = 1
+	hide-status = 0
+	hide-status = 1

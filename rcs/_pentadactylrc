@@ -1,0 +1,12 @@
+javascript <<EOF
+makecang = function() {
+    var u=buffer.URL;
+    var t=buffer.title;
+    cangurl="http://cang.baidu.com/do/add?it="+encodeURIComponent(t)+"&iu="+encodeURIComponent(u);
+    dactyl.execute('tabopen '+cangurl);
+}
+EOF
+
+map -modes=n,v sc -javascript makecang()
+
+set go+=Tn
