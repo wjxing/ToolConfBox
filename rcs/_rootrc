@@ -1,7 +1,7 @@
 export GOROOT=$HOME/root/external/go
 export GOPATH=$HOME/root/external/go/extern:$HOME/Workspace/Golang
 export __GOBIN__=${GOPATH//://bin:}/bin
-export PATH=$GOROOT/bin:$__GOBIN__:$PATH
+export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$PATH
 
 source $HOME/root/etc/bash_completion.d/*
 

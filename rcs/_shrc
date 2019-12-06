@@ -16,7 +16,7 @@ function color_error() {
 
 ####################################
 
-MY_SH_INIT_d="$HOME/.vim/plugin/bin $HOME/external"
+MY_SH_INIT_d="$HOME/.vim/plugin/bin $HOME/root"
 
 for d in ${MY_SH_INIT_d}
 do
