@@ -52,7 +52,7 @@ export GREP_COLORS='ms=00;32:mc=01;31:sl=:cx=:fn=36:ln=32:bn=32:se=36'
 export GOROOT=$HOME/root/external/go
 export GOPATH=$HOME/root/external/go/extern:$HOME/Workspace/Golang
 export __GOBIN__=${GOPATH//://bin:}/bin
-export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$PATH
+export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$HOME/Workspace/ToolBox/tools/bin:$PATH
 
 source $HOME/root/etc/bash_completion.d/*
 
