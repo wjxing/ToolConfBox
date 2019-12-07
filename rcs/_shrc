@@ -16,17 +16,6 @@ function color_error() {
 
 ####################################
 
-MY_SH_INIT_d="$HOME/.vim/plugin/bin $HOME/root"
-
-for d in ${MY_SH_INIT_d}
-do
-    if [ -f "$d/my_sh_init.sh" ]; then
-        source $d/my_sh_init.sh
-    fi
-done
-
-####################################
-
 function __W_GEN_TAGS_INTER() {
     local c IFS=' '$'\t'$'\n'
     for c in $1; do
@@ -48,6 +37,7 @@ function __W_GEN_TAGS_COMP() {
 }
 
 complete -o nospace -F __W_GEN_TAGS_COMP gen_tags_global_lookup
+
 ####################################
 
 #For tmux and vim solarized colorschem 256 bit support
@@ -57,3 +47,15 @@ export TERM=screen-256color
 export GREP_OPTIONS='--color=auto'
 export GREP_COLORS='ms=00;32:mc=01;31:sl=:cx=:fn=36:ln=32:bn=32:se=36'
 
+####################################
+
+export GOROOT=$HOME/root/external/go
+export GOPATH=$HOME/root/external/go/extern:$HOME/Workspace/Golang
+export __GOBIN__=${GOPATH//://bin:}/bin
+export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$PATH
+
+source $HOME/root/etc/bash_completion.d/*
+
+if [ ! -n $SSH_TTY ]; then
+    export DISPLAY='192.168.1.104:0'
+fi
