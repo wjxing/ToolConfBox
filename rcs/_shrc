@@ -33,10 +33,10 @@ function __W_GEN_TAGS_IMP() {
 }
 
 function __W_GEN_TAGS_COMP() {
-    __W_GEN_TAGS_IMP "clean cpp java temp tname= prune="
+    __W_GEN_TAGS_IMP "clean cpp dis_expand_tab include= java temp tname= prune="
 }
 
-complete -o nospace -F __W_GEN_TAGS_COMP gen_tags_global_lookup
+complete -o nospace -F __W_GEN_TAGS_COMP gen_global_tags
 
 ####################################
 
