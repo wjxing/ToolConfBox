@@ -54,7 +54,7 @@ export GOPATH=$HOME/root/external/go/extern:$HOME/Workspace/Golang
 export __GOBIN__=${GOPATH//://bin:}/bin
 export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$HOME/Workspace/ToolBox/tools/bin:$HOME/Workspace/ToolBox/root/usr/bin:$PATH
 
-source $HOME/root/etc/bash_completion.d/*
+source $HOME/Workspace/ToolBox/root/etc/bash_completion.d/*
 
 if [ ! -n $SSH_TTY ]; then
     export DISPLAY='192.168.1.104:0'

@@ -60,7 +60,7 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 
 plugins=(
-  git incr
+  git
 )
 
 # User configuration
@@ -103,7 +103,7 @@ plugins+=(
     zsh-autosuggestions
 )
 
-[[ -s $HOME/root/etc/profile.d/autojump.sh ]] && source $HOME/root/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 source $ZSH/oh-my-zsh.sh
 
 autoload bashcompinit
