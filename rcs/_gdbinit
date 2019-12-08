@@ -1,0 +1,4 @@
+#source /$HOME/Workspace/ToolBox/tools/source/debug/gdb/gef/gef.py
+#source /$HOME/Workspace/ToolBox/tools/source/debug/gdb/gdb-dashboard/.gdbinit
+set history filename ~/.gdb_history
+set history save on
