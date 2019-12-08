@@ -2,6 +2,7 @@ alias ..2="cd ../../"
 alias ..3="cd ../../../"
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../../"
+alias grep="grep --color=auto"
 
 function git_diff() {
     git diff --no-ext-diff -w "$@" | vim -R -
@@ -44,7 +45,6 @@ complete -o nospace -F __W_GEN_TAGS_COMP gen_global_tags
 export TERM=screen-256color
 # export TERM=xterm-256color
 
-export GREP_OPTIONS='--color=auto'
 export GREP_COLORS='ms=00;32:mc=01;31:sl=:cx=:fn=36:ln=32:bn=32:se=36'
 
 ####################################
@@ -54,7 +54,7 @@ export GOPATH=$HOME/root/external/go/extern:$HOME/Workspace/Golang
 export __GOBIN__=${GOPATH//://bin:}/bin
 export PATH=$GOROOT/bin:$__GOBIN__:$HOME/root/usr/bin:$HOME/Workspace/ToolBox/tools/bin:$PATH
 
-source $HOME/root/etc/bash_completion.d/*
+source $HOME/Workspace/ToolBox/root/etc/bash_completion.d/*
 
 if [ ! -n $SSH_TTY ]; then
     export DISPLAY='192.168.1.104:0'
