@@ -4,9 +4,9 @@ PS1='\[\033[4;01;32m\]\u\[\033[00m\]\[\033[01;33m\]@\h \w\[\033[00m\]\n\[\033[01
 
 if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
-# dircolors -p > ~/.dir_colors
-    if [ -f ~/.dir_colors ]; then
-        eval "$(dircolors -b ~/.dir_colors)"
+# dircolors -p > ~/.dircolors
+    if [ -f ~/.dircolors ]; then
+        eval "$(dircolors -b ~/.dircolors)"
     fi
 fi
 
