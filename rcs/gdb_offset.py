@@ -12,9 +12,9 @@ class Offsets(gdb.Command):
 
         stype = gdb.lookup_type('struct %s' % argv[0])
 
-        print argv[0], '{'
+        print(argv[0] + '{')
         for field in stype.fields():
-            print '    [0x%x] %s' % (field.bitpos//8, field.name)
-        print '}'
+            print('    [0x%x] %s' % (field.bitpos//8, field.name))
+        print('}')
 
 Offsets()
