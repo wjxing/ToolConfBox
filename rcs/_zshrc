@@ -103,7 +103,6 @@ plugins+=(
     zsh-autosuggestions
 )
 
-[[ -s $HOME/root/etc/profile.d/autojump.sh ]] && source $HOME/root/etc/profile.d/autojump.sh
 source $ZSH/oh-my-zsh.sh
 
 autoload bashcompinit
