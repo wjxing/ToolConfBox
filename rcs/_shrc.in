@@ -61,9 +61,24 @@ if [ -d $_TOOLBOX_HOME/root/etc/bash_completion.d/ ]; then
     source $_TOOLBOX_HOME/root/etc/bash_completion.d/*
 fi
 
-unset _TOOLBOX_HOME
-
 # For ssh putty xming
 #if [ ! -n $SSH_TTY ]; then
 #    export DISPLAY='192.168.1.104:0'
 #fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$(_TOOLBOX_HOME)/root/external/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$(_TOOLBOX_HOME)/root/external/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$(_TOOLBOX_HOME)/root/external/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$(_TOOLBOX_HOME)/root/external/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+unset _TOOLBOX_HOME
