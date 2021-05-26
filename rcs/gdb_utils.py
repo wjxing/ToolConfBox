@@ -15,6 +15,8 @@ class PluginAdd(gdb.Command):
             gdb.execute("source {}/source/debug/gdb/gef/gef.py".format(toolbox))
         elif argv[0] == "db":
             gdb.execute("source {}/source/debug/gdb/gdb-dashboard/.gdbinit".format(toolbox))
+        elif argv[0] == "peda":
+            gdb.execute("source {}/source/debug/gdb/peda/peda.py".format(toolbox))
 
 class Offsets(gdb.Command):
 
