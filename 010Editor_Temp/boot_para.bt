@@ -1,0 +1,212 @@
+//------------------------------------------------
+//--- 010 Editor v8.0.1 Binary Template
+//
+//      File: boot_para.bt
+//   Authors: Jxing.W
+//   Version: 1.0
+//   Purpose: Show Boot Para
+//  Category: Image
+// File Mask: boot_para
+//  ID Bytes: 15 32 05 02
+//   History: 
+//------------------------------------------------
+
+#define CHANNEL_NUM     2
+#define RANK_MAX        2
+#define DQS_NUMBER_LP4  2
+#define DQS_BIT_NUMBER  8
+#define DQ_DATA_WIDTH_LP4 16
+
+typedef uchar U8;
+typedef char S8;
+typedef uint16 U16;
+typedef uint32 U32;
+typedef uint64 U64;
+
+local int idx1 <hidden=true>;
+local int idx2 <hidden=true>;
+local int idx3 <hidden=true>;
+
+int Align(int val, int align)
+{
+  return ((val+(align-1)) & (~(align-1))) - val;
+}
+
+typedef struct _DRAM_INFO_BY_MRR_T
+{
+    U16 u2MR5VendorID <format=hex>;
+    U16 u2MR6RevisionID <format=hex>;
+	FSkip(Align(sizeof(U32), sizeof(U64)));
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+        for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            U64 u8MR8Density <format=hex>;
+    }
+} DRAM_INFO_BY_MRR_T;
+
+typedef struct _SAVE_TIME_FOR_CALIBRATION_T
+{   
+    U8 ucnum_dlycell_perT;
+	FSkip(Align(sizeof(U8), sizeof(U16)));
+    U16 u2DelayCellTimex100;
+
+    // CLK & DQS duty
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+        for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            S8 s1ClockDuty_clk_delay_cell;
+    }
+    U8 u1clk_use_rev_bit;
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+        for (idx2 = 0; idx2 < DQS_NUMBER_LP4; idx2++)
+            S8 s1DQSDuty_clk_delay_cell;
+    }
+    U8 u1dqs_use_rev_bit <format=hex>;
+
+    // CBT
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            U8 u1CBTVref_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            U8 u1CBTClkDelay_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            U8 u1CBTCmdDelay_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            U8 u1CBTCsDelay_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_BIT_NUMBER; idx3++)
+                U8 u1CBTCA_PerBit_DelayLine_Save;
+    }
+    // Write leveling
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1WriteLeveling_bypass_Save;  //for bypass writeleveling
+    }
+
+    // Gating
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1Gating2T_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1Gating05T_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1Gatingfine_tune_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1Gatingucpass_count_Save;
+    }
+
+    // TX perbit
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+			U8 u1TxWindowPerbitVref_Save;
+	}
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U16 u1TxCenter_min_Save;
+    }
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U16 u1TxCenter_max_Save;
+    }
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQ_DATA_WIDTH_LP4; idx3++)
+                U16 u1Txwin_center_Save;
+    }
+    //U16 u1Txfirst_pass_Save[CHANNEL_NUM][RANK_MAX][DQ_DATA_WIDTH_LP4];
+    //U16 u1Txlast_pass_Save[CHANNEL_NUM][RANK_MAX][DQ_DATA_WIDTH_LP4];
+    //U8 u1TX_PerBit_DelayLine_Save[CHANNEL_NUM][RANK_MAX][DQ_DATA_WIDTH_LP4];  
+
+    // Datlat
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+			U8 u1RxDatlat_Save;
+	}
+
+    // RX perbit
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+		U8 u1RxWinPerbitVref_Save;
+	}
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1RxWinPerbit_DQS;
+    }
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+                U8 u1RxWinPerbit_DQM;
+    }
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQ_DATA_WIDTH_LP4; idx3++)
+				U8 u1RxWinPerbit_DQ;
+	}
+    //S16 u1RxWinPerbitDQ_firsbypass_Save[CHANNEL_NUM][RANK_MAX][DQ_DATA_WIDTH_LP4];  //for bypass rxwindow
+    //U8 u1RxWinPerbitDQ_lastbypass_Save[CHANNEL_NUM][RANK_MAX][DQ_DATA_WIDTH_LP4];  //for bypass rxwindow
+
+    //TX OE
+	for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+				U8 u1TX_OE_DQ_MCK;
+	}
+    for (idx1 = 0; idx1 < CHANNEL_NUM; idx1++) {
+	    for (idx2 = 0; idx2 < RANK_MAX; idx2++)
+            for (idx3 = 0; idx3 < DQS_NUMBER_LP4; idx3++)
+				U8 u1TX_OE_DQ_UI;
+	}
+
+} SAVE_TIME_FOR_CALIBRATION_T;
+
+typedef struct _DRAM_CALIBRATION_HEADER_T
+{
+	U32	pl_version <format=hex>;
+	U16	magic_number <format=hex>;
+	FSkip(Align(sizeof(U16), sizeof(U32)));
+	U32	calib_err_code <format=hex>;
+} DRAM_CALIBRATION_HEADER_T;
+
+typedef struct _DRAM_CALIBRATION_MRR_DATA_T
+{
+	U16	checksum <format=hex>;
+	U16 emi_checksum <format=hex>;
+	FSkip(Align(sizeof(U32), sizeof(U64)));
+	DRAM_INFO_BY_MRR_T DramInfo;
+} DRAM_CALIBRATION_MRR_DATA_T;
+
+typedef struct _DRAM_CALIBRATION_SHU_DATA_T
+{
+	U16	checksum <format=hex>;
+	SAVE_TIME_FOR_CALIBRATION_T	calibration_data;
+} DRAM_CALIBRATION_SHU_DATA_T;
+
+typedef struct _DRAM_CALIBRATION_DATA_T
+{
+	DRAM_CALIBRATION_HEADER_T header;
+	FSkip(Align(sizeof(U32), sizeof(U64)));
+	DRAM_CALIBRATION_MRR_DATA_T mrr_info;
+	DRAM_CALIBRATION_SHU_DATA_T	data[3];
+} DRAM_CALIBRATION_DATA_T;
+
+LittleEndian();
+DRAM_CALIBRATION_DATA_T data <bgcolor=cLtGray>;

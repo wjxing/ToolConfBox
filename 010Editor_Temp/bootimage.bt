@@ -1,0 +1,68 @@
+//------------------------------------------------
+//--- 010 Editor v8.0.1 Binary Template
+//
+//      File: bootimage.bt
+//   Authors: Jxing.W
+//   Version: 1.0
+//   Purpose: Show bootimage header
+//  Category: Image
+// File Mask: *
+//  ID Bytes: 41 4E 44 52 4F 49 44 21
+//   History: 
+//------------------------------------------------
+
+local string BOOT_MAGIC = "ANDROID!";
+local uint32 BOOT_MAGIC_SIZE = 8;
+local uint32 BOOT_NAME_SIZE = 16;
+local uint32 BOOT_ARGS_SIZE = 512;
+local uint32 BOOT_EXTRA_ARGS_SIZE = 1024;
+
+typedef struct boot_img_hdr
+{
+    char magic[BOOT_MAGIC_SIZE];
+
+    uint32 kernel_size <format=hex>;  /* size in bytes */
+    uint32 kernel_addr <format=hex>;  /* physical load addr */
+
+    uint32 ramdisk_size <format=hex>; /* size in bytes */
+    uint32 ramdisk_addr <format=hex>; /* physical load addr */
+
+    uint32 second_size <format=hex>;  /* size in bytes */
+    uint32 second_addr <format=hex>;  /* physical load addr */
+
+    uint32 tags_addr <format=hex>;    /* physical addr for kernel tags */
+    uint32 page_size <format=hex>;    /* flash page size we assume */
+    uint32 unused;       /* reserved for future expansion: MUST be 0 */
+
+    /* operating system version and security patch level; for
+     * version "A.B.C" and patch level "Y-M-D":
+     * ver = A << 14 | B << 7 | C         (7 bits for each of A, B, C)
+     * lvl = ((Y - 2000) & 127) << 4 | M  (7 bits for Y, 4 bits for M)
+     * os_version = ver << 11 | lvl */
+    uint32 os_version <read=ReadOSVersion>;
+
+    char name[BOOT_NAME_SIZE]; /* asciiz product name */
+
+    char cmdline[BOOT_ARGS_SIZE];
+
+    uint32 id[8]; /* timestamp / checksum / sha1 / etc */
+
+    /* Supplemental command line data; kept here to maintain
+     * binary compatibility with older versions of mkbootimg */
+    char extra_cmdline[BOOT_EXTRA_ARGS_SIZE];
+} boot_img_hdr_t;
+
+LittleEndian();
+boot_img_hdr_t header <bgcolor=cLtGray>;
+
+string ReadOSVersion(uint32 &os_version)
+{
+    string s;
+    uint32 A = (os_version >> 25) & 0x7F;
+    uint32 B = (os_version >> 18) & 0x7F;
+    uint32 C = (os_version >> 11) & 0x7F;
+    uint32 Y = (os_version >> 4) & 0x7F;
+    uint32 M = (os_version) & 0xF;
+    SPrintf(s, "%d.%d.%d-%d-%d", A, B, C, Y, M);
+    return s;
+}

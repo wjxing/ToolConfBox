@@ -1,0 +1,37 @@
+//------------------------------------------------
+//--- 010 Editor v8.0.1 Binary Template
+//
+//      File: preloader.bt
+//   Authors: Jxing.W
+//   Version: 1.0
+//   Purpose: Show preloader header
+//  Category: Image
+// File Mask: *
+//  ID Bytes: 4D 4D 4D 01
+//   History: 
+//------------------------------------------------
+
+typedef struct gfh_header {
+    unsigned int m_magic_ver <format=hex>;
+    unsigned short m_size <format=hex>;
+    unsigned short m_type;
+} gfh_header_t;
+ 
+typedef struct gfh_file_info {
+    gfh_header_t    m_gfh_hdr;
+    char            m_id[12]; /* include '\0' */
+    unsigned int    m_file_ver <format=hex>;
+    unsigned short  m_file_type <format=hex>;
+    unsigned char   m_flash_dev <format=hex>;
+    unsigned char   m_sig_type <format=hex>;
+    unsigned int    m_load_addr <format=hex>;
+    unsigned int    m_file_len <format=hex>;
+    unsigned int    m_max_size <format=hex>;
+    unsigned int    m_content_offset <format=hex>;
+    unsigned int    m_sig_len <format=hex>;
+    unsigned int    m_jump_offset <format=hex>;
+    unsigned int    m_attr <format=hex>;
+} gfh_file_info_t;
+
+LittleEndian();
+gfh_file_info_t header <bgcolor=cLtGray>;

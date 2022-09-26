@@ -1,0 +1,31 @@
+//------------------------------------------------
+//--- 010 Editor v8.0.1 Binary Template
+//
+//      File: mkimage.bt
+//   Authors: Jxing.W
+//   Version: 1.0
+//   Purpose: Show mkimage header
+//  Category: Image
+// File Mask: *
+//  ID Bytes: 88 16 88 58
+//   History: 
+//------------------------------------------------
+
+typedef union {
+    struct {
+        unsigned int magic <format=hex>;     /* partition magic */
+        unsigned int dsize <format=hex>;     /* partition data size */
+        char name[32];                       /* partition name */
+        unsigned int maddr <format=hex>;     /* partition memory address */
+    } info;
+    unsigned char data[512];
+} part_hdr_t;
+
+LittleEndian();
+part_hdr_t header <bgcolor=cLtGray>;
+
+// verify header
+if (header.info.magic != 0x58881688)
+{
+    return -1;
+}
