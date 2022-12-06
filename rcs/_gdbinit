@@ -1,4 +1,4 @@
-source ~/Workspace/ToolBox/config/rcs/gdb_utils.py
+source /opt/Workspace/ToolBox/config/rcs/gdb_utils.py
 #source ~/Workspace/ToolBox/source/debug/gdb/gef/gef.py
 #source ~/Workspace/ToolBox/source/debug/gdb/gdb-dashboard/.gdbinit
 set history filename ~/.gdb_history

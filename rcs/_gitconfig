@@ -11,10 +11,11 @@
 	rebaseg = !git rebase $(git config branch.$(git rev-parse --abbrev-ref HEAD).remote)/$(git rev-parse --abbrev-ref HEAD)
 	log-a = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cN - %cr)%Creset' --abbrev-commit --date=relative
 [core]
-	autocrlf = input
-	whitespace = -trailing-space,space-before-tab,-indent-with-non-tab,-cr-at-eol
+	autocrlf = false
+	whitespace = cr-at-eol
 	pager = less -x1,5
 	editor = vim
+	quotepath = false
 [difftool]
 	prompt = false
 [diff]
