@@ -14,7 +14,7 @@ if [ $? == 0 ]; then
     exit 0
 fi
 
-CODE_BASE=$HOME/Workspace/Code/SDK/Boot_$SESSION_NAME
+CODE_BASE=$HOME/Workspace/Code/SDK/Boot_$SESSION_NAME/src
 if [ ! -d $CODE_BASE ]; then
     echo "Code base $CODE_BASE not exist"
     exit 1
